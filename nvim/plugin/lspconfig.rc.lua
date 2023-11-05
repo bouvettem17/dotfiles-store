@@ -12,6 +12,26 @@ local on_attach = function(client, bufnr)
 
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
+  local function bemol()
+    local bemol_dir = vim.fs.find({ '.bemol' }, { upward = true, type = 'directory'})[1]
+    local ws_folders_lsp = {}
+    if bemol_dir then
+        local file = io.open(bemol_dir .. '/ws_root_folders', 'r')
+        if file then
+            for line in file:lines() do
+                table.insert(ws_folders_lsp, line)
+            end
+           file:close()
+         end
+     end
+
+     for _, line in ipairs(ws_folders_lsp) do
+        vim.lsp.buf.add_workspace_folder(line)
+     end
+
+    end
+
+  bemol()
   --Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -27,29 +47,29 @@ end
 
 protocol.CompletionItemKind = {
   '', -- Text
-  '', -- Method
-  '', -- Function
-  '', -- Constructor
+  '󰊕', -- Method
+  '󰊕', -- Function
+  '󰊕', -- Constructor
   '', -- Field
   '', -- Variable
   '', -- Class
-  'ﰮ', -- Interface
-  '', -- Module
+  '󰜰', -- Interface
+  '󰏗', -- Module
   '', -- Property
   '', -- Unit
-  '', -- Value
+  '󰎠', -- Value
   '', -- Enum
-  '', -- Keyword
-  '﬌', -- Snippet
+  '󰌋', -- Keyword
+  '󰘍', -- Snippet
   '', -- Color
   '', -- File
-  '', -- Reference
+  '󰆑', -- Reference
   '', -- Folder
   '', -- EnumMember
   '', -- Constant
   '', -- Struct
   '', -- Event
-  'ﬦ', -- Operator
+  '󰘧', -- Operator
   '', -- TypeParameter
 }
 
@@ -74,12 +94,13 @@ nvim_lsp.sourcekit.setup {
   on_attach = on_attach,
 }
 
-nvim_lsp.jdtls.setup {
+
+--[[nvim_lsp.jdtls.setup {
   on_attach = on_attach,
   filetypes = { "java" },
-  cmd = { "jdtls", "--jvm-arg=-javaagent:/Library/Java/lombok.jar" },
   capabilities = capabilities
-}
+}]]
+
 
 nvim_lsp.html.setup {
   on_attach = on_attach,
@@ -96,7 +117,7 @@ nvim_lsp.html.setup {
   capabilities = capabilities
 }
 
-nvim_lsp.sumneko_lua.setup {
+nvim_lsp.lua_ls.setup {
   on_attach = on_attach,
   settings = {
     Lua = {
@@ -116,28 +137,38 @@ nvim_lsp.sumneko_lua.setup {
 
 nvim_lsp.tailwindcss.setup {}
 
+project_library_path = "/Users/mjbouvet/.local/share/nvm/v12.22.12/lib/node_modules"
+local cmd = {"ngserver", "--stdio", "--tsProbeLocations", project_library_path , "--ngProbeLocations", project_library_path}
+nvim_lsp.angularls.setup{
+    on_attach = on_attach,
+    capabilities = capabilities,
+    --root_dir = nvim_lsp.util.root_pattern("Config"),
+    cmd = cmd,
+    on_new_config = function(new_config,new_root_dir)
+        new_config.cmd = cmd
+    end,
+}
+
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = true,
     update_in_insert = false,
-    virtual_text = { spacing = 4, prefix = "●" },
     severity_sort = true,
   }
 )
 
 -- Diagnostic symbols in the sign column (gutter)
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+local signs = { Error = "󰅚 ", Warn = " ", Hint = "󰌶 ", Info = " " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
 vim.diagnostic.config({
-  virtual_text = {
-    prefix = '●'
-  },
-  update_in_insert = true,
-  float = {
-    source = "always", -- Or "if_many"
-  },
+    virtual_text = false,
+    virtual_lines = true,
+    update_in_insert = true,
+    float = {
+        source = "always", -- Or "if_many"
+    },
 })

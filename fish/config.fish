@@ -14,7 +14,8 @@ alias ls "ls -p -G"
 alias la "ls -A"
 alias ll "ls -l"
 alias lla "ll -A"
-alias ide "source ~/.ide.sh"
+alias ide1 "source ~/Development/shell_scripts/ide1.sh"
+alias ide2 "source ~/Development/shell_scripts/ide2.sh"
 alias g git
 command -qv nvim && alias vim nvim
 
@@ -33,11 +34,14 @@ alias bbra "bbr apollo-pkg"
 
 set -gx EDITOR nvim
 
+rtx activate fish | source
+
 set -gx PATH bin $PATH 
 set -gx PATH ~/bin $PATH
 set -gx PATH ~/.local/bin $PATH
 set -gx PATH ~/.toolbox/bin $PATH
 set -gx PATH ~/usr/local/opt/llvm/bin $PATH
+set -gx PATH $HOME/.rbenv/shims $PATH
 
 switch (uname)
   case Darwin
