@@ -166,7 +166,9 @@ end
 
 vim.diagnostic.config({
     virtual_text = false,
-    virtual_lines = true,
+    virtual_lines = {
+        prefix = ""
+    },
     update_in_insert = true,
     float = {
         source = "always", -- Or "if_many"

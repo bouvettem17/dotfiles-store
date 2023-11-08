@@ -35,8 +35,8 @@ local config = {
         }
     },
     cmd = {
-        home .. '/Development/jdtls/jdt-language-server-1.9.0-202203031534/bin/jdtls',
-        '--jvm-arg=-javaagent:' .. home .. '/Development/jdtls/lombok.jar',
+        home .. '/.config/nvim/ftplugin/jdtls/jdt-language-server-1.9.0-202203031534/bin/jdtls',
+        '--jvm-arg=-javaagent:' .. home .. '/.config/nvim/ftplugin/jdtls/lombok.jar',
         '-data', eclipse_workspace,
     },
     root_dir = root_dir,
@@ -46,22 +46,3 @@ local config = {
 }
 
 require('jdtls').start_or_attach(config)
-
---[[
---        '/Library/Java/JavaVirtualMachines/amazon-corretto-17.jdk/Contents/Home/bin/java',
-        '-Declipse.application=org.eclipse.jdt.ls.core.id1',
-        '-Dosgi.bundles.defaultStartLevel=4',
-        '-Declipse.product=org.eclipse.jdt.ls.core.product',
-        '-Dlog.protocol=true',
-        '-Dlog.level=ALL',
-        '-Xmx4g',
-        '--add-modules=ALL-SYSTEM',
-        '--add-opens', 'java.base/java.util=ALL-UNNAMED',
-        '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
-        '-jar', home .. '/Development/jdtls/jdt-language-server-1.9.0-202203031534/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
-        '-configuration', home .. '/Development/jdtls/jdt-language-server-1.9.0-202203031534/config_mac',
-        '--jvm-arg=-javaagent:' .. home .. '/Development/jdtls/lombok.jar',
-        '-data', eclipse_workspace,
-
---
---]]
