@@ -35,7 +35,6 @@
     edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
     # add conflicted file on merge
     add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
-
 [hub]
     protocol = https
 [github]
@@ -56,5 +55,9 @@
     process = git-fs filter-proces
 [ghq]
     root = ~/ghq
-    user = "bouvettem17"
-
+    user = bouvettem17
+[init]
+	defaultBranch = main
+[user]
+	email = mjbouvet@amazon.com
+	name = Michael Bouvette
