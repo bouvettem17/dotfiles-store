@@ -1,5 +1,10 @@
 set fish_greeting ""
 
+set -gx EDITOR nvim
+set -gx TERMINFO (brew --prefix ncurses)/share/terminfo
+set -gx TERMINFO_DIRS /usr/local/opt/ncurses/share/terminfo:/usr/share/terminfo
+set -gx XDG_CONFIG_HOME $HOME/.config
+
 # aliases
 alias ls "ls -p -G"
 alias la "ls -A"
@@ -23,22 +28,19 @@ alias bball "brc --allPackages"
 alias bbb "brc --allPackages brazil-build"
 alias bbra "bbr apollo-pkg"
 
-set -gx EDITOR nvim
-set -gx TERMINFO (brew --prefix ncurses)/share/terminfo
-set -gx TERMINFO_DIRS /usr/local/opt/ncurses/share/terminfo:/usr/share/terminfo
 
-set -gx XDG_CONFIG_HOME $HOME/.config
+# paths
+fish_add_path bin
+fish_add_path ~/bin
+fish_add_path ~/.local/bin
+fish_add_path ~/.toolbox/bin
+fish_add_path /usr/local/opt/llvm/bin
+fish_add_path ~/.rbenv/shims
 
-rtx activate fish | source
+# other
+abbr weather "curl -s wttr.in/San+Diego | grep -v Follow"
 
-set -gx PATH bin $PATH
-set -gx PATH ~/bin $PATH
-set -gx PATH ~/.local/bin $PATH
-set -gx PATH ~/.toolbox/bin $PATH
-set -gx PATH ~/usr/local/opt/llvm/bin $PATH
-set -gx PATH $HOME/.rbenv/shims $PATH
-
-
+# os-specific config
 switch (uname)
     case Darwin
         source (dirname (status --current-filename))/config-osx.fish
