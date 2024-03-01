@@ -67,3 +67,6 @@ keymap.set("n", "<C-c>", "<cmd>normal! ciw<cr>a")
 
 -- ChatGPT
 keymap.set("n", "<leader>gpt", ":ChatGPT<Return>")
+
+-- Print Current Buffer Location
+keymap.set("n", "cb", ":lua print(vim.api.nvim_buf_get_name(0))<CR>")
