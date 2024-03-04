@@ -1,5 +1,6 @@
 if type -q exa
-    alias ll "exa -l -g --icons"
+    alias ll "eza -l -g --icons"
+    alias llt "eza --tree"
     alias lla "ll -a"
 end
 

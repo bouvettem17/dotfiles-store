@@ -51,3 +51,10 @@ vim.api.nvim_create_autocmd("VimLeave", {
         util.set_user_var("IS_NVIM", false)
     end,
 })
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+    pattern = { "*" },
+    callback = function()
+        vim.b.autoformat = false
+    end,
+})
