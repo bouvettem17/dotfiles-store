@@ -18,27 +18,6 @@
                 },
                 "rules": [
                     {
-                        "description": "Run/Stop mouseMove script with fn+m (mac keyboard)",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "m",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "fn"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "/opt/homebrew/bin/fish /Users/mjbouvet/Development/shell_scripts/dev_scripts/runMouseMove.sh"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Open vlt-na Conduit Account with fn+v (mac keyboard)",
                         "manipulators": [
                             {

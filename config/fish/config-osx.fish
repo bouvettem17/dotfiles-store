@@ -1,4 +1,4 @@
-if type -q exa
+if type -q eza
     alias ll "eza -l -g --icons"
     alias llt "eza --tree"
     alias lla "ll -a"

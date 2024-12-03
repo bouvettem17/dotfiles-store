@@ -22,10 +22,10 @@ config.underline_thickness = 3
 config.cursor_thickness = 2
 config.underline_position = -6
 
-config.term = "wezterm"
+config.term = "xterm-256color"
 config.window_decorations = "RESIZE"
 
---config.color_scheme = "OneDark (base16)"
+-- config.color_scheme = "OneDark (base16)"
 
 --[[config.colors = {
 	background = "#21252B",
