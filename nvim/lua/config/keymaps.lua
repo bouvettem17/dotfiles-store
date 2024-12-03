@@ -1,6 +1,6 @@
 local util = require("util")
 local discipline = require("config.discipline")
-discipline.cowboy()
+-- discipline.cowboy()
 
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
